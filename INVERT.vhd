@@ -4,7 +4,7 @@
 -- 
 -- Create Date:    17:33:43 04/28/2026 
 -- Design Name: 
--- Module Name:    NOT - Behavioral 
+-- Module Name:    INVERT - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -20,14 +20,14 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity NOT_Comp is
+entity INVERT_Comp is
     Port (  A : in  STD_LOGIC_VECTOR (3 downto 0);
             B : in  STD_LOGIC_VECTOR (3 downto 0);
             Res : out  STD_LOGIC_VECTOR (3 downto 0);
             Flags : out  STD_LOGIC_VECTOR (3 downto 0) --Zero, Neg, Cout, Over
     );
-end NOT_Comp;
+end INVERT_Comp;
 
-architecture Behavioral of NOT_Comp is
+architecture Behavioral of INVERT_Comp is
 begin
 end Behavioral;
