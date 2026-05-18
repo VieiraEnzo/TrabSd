@@ -19,16 +19,9 @@ begin
 
     Res <= temp_res;
 
-    -- Zero: resultado ficou 0000
     Flags(0) <= '1' when temp_res = "0000" else '0';
-
-    -- Negativo: bit mais significativo do resultado
     Flags(1) <= temp_res(3);
-
-    -- Carry out: não se aplica aqui
     Flags(2) <= '0';
-
-    -- Overflow: não se aplica aqui
     Flags(3) <= '0';
 
 end Behavioral;
