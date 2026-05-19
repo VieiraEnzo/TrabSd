@@ -59,7 +59,6 @@ architecture Behavioral of SdModulo is
 		);
 	end component;
 
-	--Maquina de stados
 	type state_type is (ST_OP, ST_A, ST_B, ST_RESULT);
 	signal state : state_type := ST_OP;
 	signal in_A, in_B, in_Op, F , R: STD_LOGIC_VECTOR (3 downto 0);
@@ -98,10 +97,10 @@ begin
 
 			
 	VecLed <= R and can_print;
-   	FlagZero <= debounced_button;
-	FlagNeg <= Btn;
-	FlagCout <= F(2) and F(1) and F(0);
-	FlagOver <= F(3);
+   FlagZero <= F(0) and can_print(0);
+	FlagNeg <= F(1) and can_print(0);
+	FlagCout <= F(2) and can_print(0);
+	FlagOver <= F(3) and can_print(0);
 
 
 end Behavioral;

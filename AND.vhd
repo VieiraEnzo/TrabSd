@@ -43,7 +43,7 @@ begin
 
     Res <= A and B;
     Flags(0) <= (not(A(0)and B(0))) and (not(A(1)and B(1))) and (not(A(2)and B(2))) and (not(A(3)and B(3))); 
-    Flags(1) <= '0'; --trocar
+    Flags(1) <= (A(3) and B(3));
     Flags(2) <= '0';
     Flags(3) <= '0';
 

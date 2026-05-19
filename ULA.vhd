@@ -46,7 +46,7 @@ architecture Behavioral of ULA is
             );
     end component;
 
-    component GCD_Comp is
+    component LESS_Comp is
         Port (  A : in  STD_LOGIC_VECTOR (3 downto 0);
                 B : in  STD_LOGIC_VECTOR (3 downto 0);
                 Res : out  STD_LOGIC_VECTOR (3 downto 0);
@@ -70,7 +70,7 @@ architecture Behavioral of ULA is
             );
     end component;
 
-    component INVERT_Comp is
+    component GREATER_Comp is
         Port (  A : in  STD_LOGIC_VECTOR (3 downto 0);
                 B : in  STD_LOGIC_VECTOR (3 downto 0);
                 Res : out  STD_LOGIC_VECTOR (3 downto 0);
@@ -82,10 +82,10 @@ architecture Behavioral of ULA is
     signal res_sum, flags_sum : STD_LOGIC_VECTOR(3 downto 0);
     signal res_sub, flags_sub : STD_LOGIC_VECTOR(3 downto 0);
     signal res_or, flags_or : STD_LOGIC_VECTOR(3 downto 0);
-    signal res_gcd, flags_gcd : STD_LOGIC_VECTOR(3 downto 0);
+    signal res_less, flags_less : STD_LOGIC_VECTOR(3 downto 0);
     signal res_shift, flags_shift : STD_LOGIC_VECTOR(3 downto 0);
     signal res_xor, flags_xor : STD_LOGIC_VECTOR(3 downto 0);
-    signal res_invert, flags_invert : STD_LOGIC_VECTOR(3 downto 0);
+    signal res_greater, flags_greater : STD_LOGIC_VECTOR(3 downto 0);
 
     
 begin
@@ -94,40 +94,40 @@ begin
     ULA_SUM: SUM_Comp port map (A => A, B => B, Res => res_sum, Flags => flags_sum);
     ULA_SUB: SUBTRACTION_Comp port map (A => A, B => B, Res => res_sub, Flags => flags_sub);
     ULA_OR: OR_Comp port map (A => A, B => B, Res => res_or, Flags => flags_or);
-    ULA_GCD: GCD_Comp port map (A => A, B => B, Res => res_gcd, Flags => flags_gcd);
+    ULA_LESS: LESS_Comp port map (A => A, B => B, Res => res_less, Flags => flags_less);
     ULA_SHIFT: SHIFT_Comp port map (A => A, B => B, Res => res_shift, Flags => flags_shift);
     ULA_XOR: XOR_Comp port map (A => A, B => B, Res => res_xor, Flags => flags_xor);
-    ULA_INVERT: INVERT_Comp port map (A => A, B => B, Res => res_invert, Flags => flags_invert);
+    ULA_GREATER: GREATER_Comp port map (A => A, B => B, Res => res_greater, Flags => flags_greater);
 
     process(A, B, Op, res_and, flags_and, res_sum, flags_sum, res_sub, flags_sub,
-        res_or, flags_or, res_gcd, flags_gcd, res_shift, flags_shift,
-        res_xor, flags_xor, res_invert, flags_invert)
+        res_or, flags_or, res_less, flags_less, res_shift, flags_shift,
+        res_xor, flags_xor, res_greater, flags_greater)
     begin
         case Op is
-            when "0001" =>
+            when "0001" => --and
                 Res <= res_and;
                 Flags <= flags_and;
-            when "0010" =>
-                Res <= res_sum;
-                Flags <= flags_sum;
-            when "0011" =>
-                Res <= res_sub;
-                Flags <= flags_sub;
-            when "0100" =>
+            when "0010" => --or
                 Res <= res_or;
                 Flags <= flags_or;
-            when "0101" =>
-                Res <= res_gcd;
-                Flags <= flags_gcd;
-            when "0110" =>
-                Res <= res_shift;
-                Flags <= flags_shift;
-            when "0111" =>
-                Res <= res_xor;
+            when "0011" => --xor
+				    Res <= res_xor;
                 Flags <= flags_xor;
-            when "1000" =>
-                Res <= res_invert;
-                Flags <= flags_invert;
+            when "0100" => --sum
+                Res <= res_sum;
+                Flags <= flags_sum;
+            when "0101" => --sub
+                Res <= res_sub;
+                Flags <= flags_sub;
+            when "0110" => --greater
+                Res <= res_greater;
+                Flags <= flags_greater;
+            when "0111" => --less
+                Res <= res_less;
+                Flags <= flags_less;
+            when "1000" => --shift
+					 Res <= res_shift;
+                Flags <= flags_shift;
             when others =>
                 Res <= "1111";
                 Flags <= "1111";

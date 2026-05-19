@@ -20,21 +20,17 @@ begin
     Bn(2) <= not B(2);
     Bn(3) <= not B(3);
 
-    C(0) <= '1';  -- soma +1 do complemento de 2
+    C(0) <= '1';  -- soma do complemento
 
-    -- bit 0
     S(0) <= A(0) xor Bn(0) xor C(0);
     C(1) <= (A(0) and Bn(0)) or (A(0) and C(0)) or (Bn(0) and C(0));
 
-    -- bit 1
     S(1) <= A(1) xor Bn(1) xor C(1);
     C(2) <= (A(1) and Bn(1)) or (A(1) and C(1)) or (Bn(1) and C(1));
 
-    -- bit 2
     S(2) <= A(2) xor Bn(2) xor C(2);
     C(3) <= (A(2) and Bn(2)) or (A(2) and C(2)) or (Bn(2) and C(2));
 
-    -- bit 3
     S(3) <= A(3) xor Bn(3) xor C(3);
     C(4) <= (A(3) and Bn(3)) or (A(3) and C(3)) or (Bn(3) and C(3));
 
